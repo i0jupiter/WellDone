@@ -120,7 +120,7 @@ public class PumpRowView extends RelativeLayout {
         final Double distanceFromOrigin =
                 currentUserLocation.distanceInKilometersTo(mPump.getLocation());
         viewHolder.tvPumpDistance.setText(
-                String.format("%s km", df.format(distanceFromOrigin.doubleValue())));
+                String.format("%s km", df.format(distanceFromOrigin.doubleValue() * 5.0)));
 
         setPumpToRandomImage();
         setupLocationLabel(mPump);
