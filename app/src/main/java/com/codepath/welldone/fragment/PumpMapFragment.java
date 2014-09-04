@@ -28,7 +28,7 @@ import com.parse.ParseGeoPoint;
 import com.parse.ParseUser;
 
 public class PumpMapFragment extends Fragment {
-    public static final double MAP_DISPLAY_DELTA = 0.96;
+    public static final double MAP_DISPLAY_DELTA = 0.01;
     public Pump mPump;
     private MapFragment mapFragment;
     private ParseGeoPoint currentUserLocation;
