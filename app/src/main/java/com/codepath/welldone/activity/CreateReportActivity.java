@@ -165,9 +165,7 @@ public class CreateReportActivity extends Activity {
                                              reportNotes);
 
         pbLoading.setVisibility(ProgressBar.VISIBLE);
-        pinReportLocally(reportToBePersisted, newImageBitmap);
-        String singidaNearARoad = "-6.911844,33.591054";
-        askAboutPumpNavigation(this, singidaNearARoad, pumpToNavigateToAfterReporting, "Report submitted!", true);
+        pinReportLocally(this, reportToBePersisted, newImageBitmap);
     }
 
     public static void askAboutPumpNavigation(final Context context, final String currentAddress, final Pump newPump, String title, final boolean shouldPopActivityStackOnDecision) {
@@ -293,7 +291,7 @@ public class CreateReportActivity extends Activity {
     }
 
     // Persist a given report locally and check if it was pinned
-    private void pinReportLocally(final Report report, final Bitmap newImageBitmap) {
+    private void pinReportLocally(final Context context, final Report report, final Bitmap newImageBitmap) {
 
         final String pumpName = report.getPump().getName();
         Log.d("debug", "Pinning report for pump: " + pumpName);
@@ -320,8 +318,11 @@ public class CreateReportActivity extends Activity {
                     // Try the persist the report remotely
                     persistReportRemotely(report, newImageBitmap);
 
-                    // Go back to pump list browser
+                    // Finish this activity. Should take us back to pump list browser
                     pbLoading.setVisibility(ProgressBar.INVISIBLE);
+                    if (context instanceof Activity) {
+                        ((Activity) context).finish();
+                    }
 
                 } else {
                     // We should never get here! But just in case we do, show a toast
