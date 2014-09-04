@@ -3,7 +3,7 @@
     tools:context=".PumpList" >
 
     <item android:id="@+id/sort_options"
-        android:showAsAction="ifRoom"
+        android:showAsAction="always"
         android:orderInCategory="10"
         android:title="@string/sort_by">
         <menu>

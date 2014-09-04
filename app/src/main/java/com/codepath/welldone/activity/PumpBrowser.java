@@ -17,6 +17,7 @@ import com.codepath.welldone.helper.NetworkUtil;
 import com.codepath.welldone.helper.StringUtil;
 import com.codepath.welldone.model.Pump;
 import com.parse.ParseAnalytics;
+import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -69,10 +70,6 @@ public class PumpBrowser extends Activity implements PumpListAdapter.PumpListLis
         isDisplayingMap = false;
     }
 
-    private void initializeBothFragmentsAndDisplayMap() {
-
-    }
-
     @Override
     protected void onResume() {
 
@@ -112,7 +109,7 @@ public class PumpBrowser extends Activity implements PumpListAdapter.PumpListLis
         getMenuInflater().inflate(R.menu.pump_browser, menu);
         mMapToggleMenuItem = menu.findItem(R.id.action_map_me_bro);
         setupMapToggleMenuItem();
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void setupMapToggleMenuItem() {
@@ -128,17 +125,23 @@ public class PumpBrowser extends Activity implements PumpListAdapter.PumpListLis
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_map_me_bro) {
-            if (item.getTitle().equals("Map")) {
-                swapInMapFragment();
-            }
-            else {
-                swapInListFragment();
-            }
-            return true;
+
+        switch (item.getItemId()) {
+            case R.id.action_map_me_bro:
+                if (item.getTitle().equals("Map")) {
+                    swapInMapFragment();
+                }
+                else {
+                    swapInListFragment();
+                }
+                return true;
+            case R.id.action_logout:
+                ParseUser.logOut();
+                this.finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     private void swapInListFragment() {
