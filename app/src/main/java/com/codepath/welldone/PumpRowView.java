@@ -24,7 +24,7 @@ import java.text.DecimalFormat;
 
 public class PumpRowView extends RelativeLayout {
 
-    public static final int TARGET_DETAILS_HEIGHT = 900;
+    public static final int TARGET_DETAILS_HEIGHT = 600;
     public static final int ANIMATE_IN_DURATION_MILLIS = 300;
     public static final int ANIMATE_OUT_DURATION_MILLIS = 500;
 
@@ -94,7 +94,7 @@ public class PumpRowView extends RelativeLayout {
 
     public void updateSubviews(ParseGeoPoint currentUserLocation) {
 
-        viewHolder.tvLastUpdated.setText(String.format("%s ago",
+        viewHolder.tvLastUpdated.setText(String.format("%s",
                 DateTimeUtil.getRelativeTimeofTweet(mPump.getUpdatedAt().toString())));
         viewHolder.tvStatus.setText(mPump.getCurrentStatus());
         if (mPump.isBroken()) {
